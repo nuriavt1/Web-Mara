@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Mara — comunicación, branding e identidad.">
+  <title>Mara — Dirección de arte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --black:#000; --white:#fff; --line:#777; --pad:clamp(20px, 2.5vw, 40px); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--white); color:var(--black); font-family:"DM Sans", Arial, sans-serif; overflow-x:hidden; }
+    a { color:inherit; text-decoration:none; }
+    button { font:inherit; }
+    .site-header { height:35px; padding:0 var(--pad); display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #dedede; font-size:7px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
+    .brand { font-family:"Archivo Black", sans-serif; font-size:15px; letter-spacing:-.13em; }
+    .menu { border:0; background:transparent; padding:8px 0; font-size:7px; font-weight:700; text-transform:uppercase; cursor:pointer; }
+    .menu::before { content:"* "; }
+
+    .menu-panel { position:fixed; inset:0; z-index:10; display:grid; place-items:center; background:#000; color:#fff; opacity:0; pointer-events:none; transition:opacity .2s ease; }
+    .menu-panel.open { opacity:1; pointer-events:auto; }
+    .menu-panel nav { display:flex; flex-direction:column; align-items:center; gap:14px; font-family:"Archivo Black", sans-serif; font-size:clamp(36px,7vw,90px); line-height:.95; text-align:center; }
+    .menu-close { position:absolute; top:13px; right:var(--pad); color:#fff; background:none; border:0; font-size:9px; font-weight:700; text-transform:uppercase; cursor:pointer; }
+
+    .hero { height:clamp(275px, 36vw, 555px); min-height:275px; display:flex; align-items:center; overflow:hidden; background:#000; color:#fff; }
+    .hero h1 { margin:0; padding-left:1.1vw; white-space:nowrap; font-family:"Archivo Black", Impact, sans-serif; font-size:clamp(185px, 28.8vw, 442px); letter-spacing:-.095em; line-height:.74; }
+    .ticker { height:44px; display:flex; align-items:center; overflow:hidden; white-space:nowrap; border-bottom:1px solid #ddd; font-size:clamp(10px, 1vw, 15px); font-weight:700; }
+    .ticker span { display:inline-block; padding-right:2rem; animation:move 25s linear infinite; }
+    @keyframes move { to { transform:translateX(-50%); } }
+
+    .label { display:block; font-size:7px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .work { padding:clamp(70px, 9vw, 145px) var(--pad) clamp(30px, 4vw, 60px); }
+    .work .label { margin-bottom:28px; }
+    .project-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); border-top:1px solid var(--line); border-left:1px solid var(--line); }
+    .project { position:relative; min-height:clamp(275px, 34vw, 525px); display:flex; align-items:center; justify-content:center; padding:34px; background:#000; color:#fff; border-right:1px solid var(--line); border-bottom:1px solid var(--line); text-align:center; overflow:hidden; }
+    .project::after { content:""; position:absolute; inset:0; border:0 solid #fff; transition:border-width .2s ease; pointer-events:none; }
+    .project:hover::after { border-width:8px; }
+    .project h2 { max-width:90%; margin:0; font-family:"Archivo Black", sans-serif; font-size:clamp(26px, 4.1vw, 64px); line-height:.98; letter-spacing:-.075em; }
+    .project .tag { position:absolute; left:clamp(20px, 2.5vw, 40px); bottom:clamp(18px, 2vw, 32px); padding:5px 16px; border:1px solid #aaa; border-radius:999px; font-size:7px; line-height:1; }
+
+    .references { min-height:112px; display:grid; grid-template-columns:1.4fr repeat(3, 1fr); align-items:center; gap:24px; padding:30px var(--pad); background:#000; color:#fff; }
+    .references .label { align-self:start; }
+    .references span:not(.label) { font-size:7px; text-align:center; }
+    .hello { height:clamp(180px, 24vw, 360px); display:flex; align-items:center; overflow:hidden; white-space:nowrap; font-family:"Archivo Black", sans-serif; font-size:clamp(150px, 25vw, 385px); letter-spacing:-.11em; line-height:.7; }
+    .hello em { color:#c9c9c9; font-style:normal; }
+
+    .contact { min-height:clamp(310px, 28vw, 440px); display:grid; grid-template-columns:1.1fr 1fr; gap:40px; padding:46px var(--pad) 70px; }
+    .contact h2 { margin:16px 0 0; font-family:"Archivo Black", sans-serif; font-size:clamp(42px, 6vw, 94px); line-height:.9; letter-spacing:-.085em; }
+    .details { display:grid; align-content:start; gap:14px; padding-top:32px; font-size:8px; line-height:1.35; }
+    .details div { display:grid; gap:2px; }
+    .details strong { font-size:7px; text-transform:uppercase; }
+    footer { height:64px; background:#000; }
+    @media (max-width:640px) {
+      .hero { height:245px; }
+      .hero h1 { font-size:47vw; }
+      .ticker { height:38px; }
+      .project-grid { grid-template-columns:1fr; }
+      .project { min-height:320px; }
+      .references { grid-template-columns:1fr 1fr; gap:20px; }
+      .references .label { grid-column:1 / -1; }
+      .references span:not(.label) { text-align:left; }
+      .contact { grid-template-columns:1fr; min-height:0; padding-bottom:55px; }
+      .details { padding-top:0; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .ticker span { animation:none; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="Mara, inicio">M.</a>
+    <button class="menu" id="menu-open" aria-expanded="false">Menú</button>
+  </header>
+
+  <div class="menu-panel" id="menu-panel" aria-hidden="true">
+    <button class="menu-close" id="menu-close">Cerrar *</button>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+
+  <main>
+    <section class="hero" id="inicio" aria-label="Mara"><h1>MARA</h1></section>
+    <div class="ticker" aria-label="Servicios"><span>COPYWRITING* BRANDING E IDENTIDAD * DISEÑO GRÁFICO * CONTENT STRATEGY* EDICIÓN MULTIMEDIA* GESTIÓN DE REDES * ANÁLISIS DE KPIS * DISEÑO WEB * COPYWRITING* BRANDING E IDENTIDAD * DISEÑO GRÁFICO * CONTENT STRATEGY* EDICIÓN MULTIMEDIA* GESTIÓN DE REDES * ANÁLISIS DE KPIS * DISEÑO WEB * </span></div>
+
+    <section class="work" id="portfolio">
+      <span class="label">Portfolio</span>
+      <div class="project-grid">
+        <article class="project"><h2>Sudoki<br>Sushi &amp; Fusion</h2><span class="tag">Comunicación</span></article>
+        <article class="project"><h2>TCAM</h2><span class="tag">Organización de Evento + Rebranding</span></article>
+        <article class="project"><h2>Òptica &amp;<br>Audiologia<br>Universitària</h2><span class="tag">Campaña 360</span></article>
+        <article class="project"><h2>Rummix</h2><span class="tag">Branding</span></article>
+        <article class="project"><h2>Banc de Sang i<br>Teixits</h2><span class="tag">Diseño</span></article>
+        <article class="project"><h2>MalEducados</h2><span class="tag">Branding</span></article>
+        <article class="project"><h2>Centre d’Estudis<br>Politècnics</h2><span class="tag">Diseño</span></article>
+        <article class="project"><h2>Tour(F)estiu</h2><span class="tag">Branding</span></article>
+      </div>
+    </section>
+
+    <section class="references" aria-label="Referencias">
+      <span class="label">Referencias</span>
+      <span>SABSEG</span><span>Fundación Ship2B</span><span>Centre d’Estudis Politècnics</span>
+    </section>
+    <div class="hello" aria-hidden="true">HOLA<em>!</em>CIAO&nbsp; HOLA<em>!</em>CIAO&nbsp;</div>
+
+    <section class="contact" id="contacto">
+      <div><span class="label">Contact</span><h2>Hablemos*</h2></div>
+      <div class="details">
+        <div><strong>Email</strong><a href="mailto:maragonzalez@gmail.com">maragonzalez@gmail.com</a></div>
+        <div><strong>Teléfono</strong><a href="tel:+34640589404">+34 640 589 404</a></div>
+        <div><strong>LinkedIn</strong><a href="#">linkedin.com/in/mara-del-granado-868643228</a></div>
+      </div>
+    </section>
+  </main>
+  <footer></footer>
+  <script>
+    const panel = document.getElementById('menu-panel');
+    const open = document.getElementById('menu-open');
+    const close = document.getElementById('menu-close');
+    const toggle = state => { panel.classList.toggle('open', state); panel.setAttribute('aria-hidden', !state); open.setAttribute('aria-expanded', state); };
+    open.addEventListener('click', () => toggle(true));
+    close.addEventListener('click', () => toggle(false));
+    panel.querySelectorAll('a').forEach(link => link.addEventListener('click', () => toggle(false)));
+    window.addEventListener('keydown', event => { if (event.key === 'Escape') toggle(false); });
+  </script>
+</body>
+</html>
