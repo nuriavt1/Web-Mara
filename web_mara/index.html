@@ -7,51 +7,80 @@
   <title>Mara — Dirección de arte</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     :root { --black:#000; --white:#fff; --line:#777; --pad:clamp(20px, 2.5vw, 40px); }
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
-    body { margin:0; background:var(--white); color:var(--black); font-family:"DM Sans", Arial, sans-serif; overflow-x:hidden; }
+    body { margin:0; background:var(--white); color:var(--black); font-family:"Poppins", Arial, sans-serif; font-size:16px; overflow-x:hidden; }
+    .asterisk-cursor { display:none; }
+    @media (pointer:fine) {
+      body, a, button { cursor:none; }
+      .asterisk-cursor { display:block; position:fixed; top:0; left:0; z-index:9999; width:28px; height:28px; color:#fff; font:700 28px/28px "Poppins", Arial, sans-serif; text-align:center; pointer-events:none; visibility:hidden; mix-blend-mode:difference; animation:rotate-cursor 2s linear infinite; }
+    }
+    @keyframes rotate-cursor {
+      from { transform:translate(-50%, -50%) rotate(0deg); }
+      to { transform:translate(-50%, -50%) rotate(360deg); }
+    }
     a { color:inherit; text-decoration:none; }
     button { font:inherit; }
-    .site-header { height:35px; padding:0 var(--pad); display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #dedede; font-size:7px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
-    .brand { font-family:"Archivo Black", sans-serif; font-size:15px; letter-spacing:-.13em; }
-    .menu { border:0; background:transparent; padding:8px 0; font-size:7px; font-weight:700; text-transform:uppercase; cursor:pointer; }
+    .site-header { height:35px; padding:0 var(--pad); display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #dedede; font-size:16px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
+    .brand { font-family:"Poppins", sans-serif; font-size:16px; font-weight:900; letter-spacing:-.13em; }
+    .menu { border:0; background:transparent; padding:8px 0; font-size:16px; font-weight:700; text-transform:uppercase; }
     .menu::before { content:"* "; }
 
-    .menu-panel { position:fixed; inset:0; z-index:10; display:grid; place-items:center; background:#000; color:#fff; opacity:0; pointer-events:none; transition:opacity .2s ease; }
-    .menu-panel.open { opacity:1; pointer-events:auto; }
-    .menu-panel nav { display:flex; flex-direction:column; align-items:center; gap:14px; font-family:"Archivo Black", sans-serif; font-size:clamp(36px,7vw,90px); line-height:.95; text-align:center; }
-    .menu-close { position:absolute; top:13px; right:var(--pad); color:#fff; background:none; border:0; font-size:9px; font-weight:700; text-transform:uppercase; cursor:pointer; }
+    .menu-panel { position:fixed; inset:0; z-index:10; display:flex; align-items:center; padding:clamp(90px, 12vh, 150px) var(--pad) 50px; background:#000; color:#fff; opacity:0; pointer-events:none; clip-path:inset(0 0 100% 0); transition:clip-path .7s cubic-bezier(.77,0,.18,1), opacity .35s ease; }
+    .menu-panel::before { content:"*"; position:absolute; right:-.08em; bottom:-.43em; color:#171717; font-size:clamp(280px, 48vw, 720px); font-weight:900; line-height:1; transform:rotate(-25deg) scale(.65); transition:transform 1.1s cubic-bezier(.16,1,.3,1); }
+    .menu-panel.open { opacity:1; pointer-events:auto; clip-path:inset(0); }
+    .menu-panel.open::before { transform:rotate(12deg) scale(1); }
+    .menu-panel nav { position:relative; z-index:1; width:min(100%, 1100px); display:flex; flex-direction:column; align-items:flex-start; gap:clamp(4px, 1.2vh, 14px); font-family:"Poppins", sans-serif; font-size:clamp(46px,9vw,130px); font-weight:900; line-height:.88; text-align:left; }
+    .menu-panel nav a { position:relative; display:inline-block; opacity:0; transform:translateY(70px) rotate(2deg); transition:color .3s ease, transform .55s cubic-bezier(.16,1,.3,1), opacity .45s ease; }
+    .menu-panel nav a::after { content:""; position:absolute; left:0; right:0; bottom:-.04em; height:.06em; background:currentColor; transform:scaleX(0); transform-origin:right; transition:transform .45s cubic-bezier(.16,1,.3,1); }
+    .menu-panel.open nav a { opacity:1; transform:translateY(0) rotate(0); }
+    .menu-panel.open nav a:nth-child(1) { animation:menu-link-in .55s .18s backwards cubic-bezier(.16,1,.3,1); }
+    .menu-panel.open nav a:nth-child(2) { animation:menu-link-in .55s .25s backwards cubic-bezier(.16,1,.3,1); }
+    .menu-panel.open nav a:nth-child(3) { animation:menu-link-in .55s .32s backwards cubic-bezier(.16,1,.3,1); }
+    @keyframes menu-link-in {
+      from { opacity:0; transform:translateY(70px) rotate(2deg); }
+      to { opacity:1; transform:translateY(0) rotate(0); }
+    }
+    .menu-panel nav a:hover, .menu-panel nav a:focus-visible { color:#b8ff38; transform:translateX(clamp(12px, 2vw, 30px)); outline:none; }
+    .menu-panel nav a:hover::after, .menu-panel nav a:focus-visible::after { transform:scaleX(1); transform-origin:left; }
+    .menu-close { position:absolute; z-index:2; top:13px; right:var(--pad); color:#fff; background:none; border:0; padding:8px 0; font-size:16px; font-weight:700; text-transform:uppercase; transition:color .25s ease, transform .35s cubic-bezier(.16,1,.3,1); }
+    .menu-close:hover, .menu-close:focus-visible { color:#b8ff38; transform:translateX(-8px); outline:none; }
 
     .hero { height:clamp(275px, 36vw, 555px); min-height:275px; display:flex; align-items:center; overflow:hidden; background:#000; color:#fff; }
-    .hero h1 { margin:0; padding-left:1.1vw; white-space:nowrap; font-family:"Archivo Black", Impact, sans-serif; font-size:clamp(185px, 28.8vw, 442px); letter-spacing:-.095em; line-height:.74; }
-    .ticker { height:44px; display:flex; align-items:center; overflow:hidden; white-space:nowrap; border-bottom:1px solid #ddd; font-size:clamp(10px, 1vw, 15px); font-weight:700; }
-    .ticker span { display:inline-block; padding-right:2rem; animation:move 25s linear infinite; }
+    .hero h1 { margin:0; padding-left:1.1vw; white-space:nowrap; font-family:"Poppins", Impact, sans-serif; font-size:clamp(185px, 28.8vw, 442px); font-weight:900; letter-spacing:-.095em; line-height:.74; }
+    .ticker { height:44px; display:flex; align-items:center; overflow:hidden; white-space:nowrap; border-bottom:1px solid #ddd; font-size:16px; font-weight:700; }
+    .ticker-track { display:flex; width:max-content; animation:move 25s linear infinite; will-change:transform; }
+    .ticker-track span { flex:none; padding-right:2rem; }
     @keyframes move { to { transform:translateX(-50%); } }
 
-    .label { display:block; font-size:7px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .label { display:block; font-size:16px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
     .work { padding:clamp(70px, 9vw, 145px) var(--pad) clamp(30px, 4vw, 60px); }
     .work .label { margin-bottom:28px; }
     .project-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); border-top:1px solid var(--line); border-left:1px solid var(--line); }
     .project { position:relative; min-height:clamp(275px, 34vw, 525px); display:flex; align-items:center; justify-content:center; padding:34px; background:#000; color:#fff; border-right:1px solid var(--line); border-bottom:1px solid var(--line); text-align:center; overflow:hidden; }
     .project::after { content:""; position:absolute; inset:0; border:0 solid #fff; transition:border-width .2s ease; pointer-events:none; }
-    .project:hover::after { border-width:8px; }
-    .project h2 { max-width:90%; margin:0; font-family:"Archivo Black", sans-serif; font-size:clamp(26px, 4.1vw, 64px); line-height:.98; letter-spacing:-.075em; }
-    .project .tag { position:absolute; left:clamp(20px, 2.5vw, 40px); bottom:clamp(18px, 2vw, 32px); padding:5px 16px; border:1px solid #aaa; border-radius:999px; font-size:7px; line-height:1; }
+    .project:hover::after, .project:focus-visible::after { border-width:8px; }
+    .project:focus-visible { outline:3px solid #b8ff38; outline-offset:-3px; }
+    .project h2 { max-width:90%; margin:0; font-family:"Poppins", sans-serif; font-size:clamp(26px, 4.1vw, 64px); font-weight:900; line-height:.98; letter-spacing:-.075em; }
+    .project .tag { position:absolute; left:clamp(20px, 2.5vw, 40px); bottom:clamp(18px, 2vw, 32px); padding:5px 16px; border:1px solid #aaa; border-radius:999px; font-size:16px; line-height:1; }
 
     .references { min-height:112px; display:grid; grid-template-columns:1.4fr repeat(3, 1fr); align-items:center; gap:24px; padding:30px var(--pad); background:#000; color:#fff; }
     .references .label { align-self:start; }
-    .references span:not(.label) { font-size:7px; text-align:center; }
-    .hello { height:clamp(180px, 24vw, 360px); display:flex; align-items:center; overflow:hidden; white-space:nowrap; font-family:"Archivo Black", sans-serif; font-size:clamp(150px, 25vw, 385px); letter-spacing:-.11em; line-height:.7; }
+    .references a { position:relative; justify-self:center; font-size:16px; text-align:center; transition:color .25s ease, transform .3s cubic-bezier(.16,1,.3,1); }
+    .references a::after { content:""; position:absolute; left:0; right:0; bottom:-5px; height:2px; background:#b8ff38; transform:scaleX(0); transform-origin:right; transition:transform .35s cubic-bezier(.16,1,.3,1); }
+    .references a:hover, .references a:focus-visible { color:#b8ff38; transform:translateY(-4px); outline:none; }
+    .references a:hover::after, .references a:focus-visible::after { transform:scaleX(1); transform-origin:left; }
+    .hello { height:clamp(180px, 24vw, 360px); display:flex; align-items:center; overflow:hidden; white-space:nowrap; font-family:"Poppins", sans-serif; font-size:clamp(150px, 25vw, 385px); font-weight:900; letter-spacing:-.11em; line-height:.7; }
     .hello em { color:#c9c9c9; font-style:normal; }
 
     .contact { min-height:clamp(310px, 28vw, 440px); display:grid; grid-template-columns:1.1fr 1fr; gap:40px; padding:46px var(--pad) 70px; }
-    .contact h2 { margin:16px 0 0; font-family:"Archivo Black", sans-serif; font-size:clamp(42px, 6vw, 94px); line-height:.9; letter-spacing:-.085em; }
-    .details { display:grid; align-content:start; gap:14px; padding-top:32px; font-size:8px; line-height:1.35; }
+    .contact h2 { margin:16px 0 0; font-family:"Poppins", sans-serif; font-size:clamp(42px, 6vw, 94px); font-weight:900; line-height:.9; letter-spacing:-.085em; }
+    .details { display:grid; align-content:start; gap:14px; padding-top:32px; font-size:16px; line-height:1.35; }
     .details div { display:grid; gap:2px; }
-    .details strong { font-size:7px; text-transform:uppercase; }
+    .details strong { font-size:16px; text-transform:uppercase; }
     footer { height:64px; background:#000; }
     @media (max-width:640px) {
       .hero { height:245px; }
@@ -61,14 +90,20 @@
       .project { min-height:320px; }
       .references { grid-template-columns:1fr 1fr; gap:20px; }
       .references .label { grid-column:1 / -1; }
-      .references span:not(.label) { text-align:left; }
+      .references a { justify-self:start; text-align:left; }
       .contact { grid-template-columns:1fr; min-height:0; padding-bottom:55px; }
       .details { padding-top:0; }
+      .menu-panel nav { font-size:clamp(44px, 15vw, 78px); }
     }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .ticker span { animation:none; } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior:auto; }
+      .ticker-track, .asterisk-cursor, .menu-panel.open nav a { animation:none; }
+      .menu-panel, .menu-panel::before, .menu-panel nav a, .menu-panel nav a::after, .menu-close { transition:none; }
+    }
   </style>
 </head>
 <body>
+  <div class="asterisk-cursor" aria-hidden="true">*</div>
   <header class="site-header">
     <a class="brand" href="#inicio" aria-label="Mara, inicio">M.</a>
     <button class="menu" id="menu-open" aria-expanded="false">Menú</button>
@@ -85,25 +120,32 @@
 
   <main>
     <section class="hero" id="inicio" aria-label="Mara"><h1>MARA</h1></section>
-    <div class="ticker" aria-label="Servicios"><span>COPYWRITING* BRANDING E IDENTIDAD * DISEÑO GRÁFICO * CONTENT STRATEGY* EDICIÓN MULTIMEDIA* GESTIÓN DE REDES * ANÁLISIS DE KPIS * DISEÑO WEB * COPYWRITING* BRANDING E IDENTIDAD * DISEÑO GRÁFICO * CONTENT STRATEGY* EDICIÓN MULTIMEDIA* GESTIÓN DE REDES * ANÁLISIS DE KPIS * DISEÑO WEB * </span></div>
+    <div class="ticker" aria-label="Servicios">
+      <div class="ticker-track" aria-hidden="true">
+        <span>COPYWRITING * BRANDING E IDENTIDAD * DISEÑO GRÁFICO * CONTENT STRATEGY * EDICIÓN MULTIMEDIA * GESTIÓN DE REDES * ANÁLISIS DE KPIS * DISEÑO WEB * </span>
+        <span>COPYWRITING * BRANDING E IDENTIDAD * DISEÑO GRÁFICO * CONTENT STRATEGY * EDICIÓN MULTIMEDIA * GESTIÓN DE REDES * ANÁLISIS DE KPIS * DISEÑO WEB * </span>
+      </div>
+    </div>
 
     <section class="work" id="portfolio">
       <span class="label">Portfolio</span>
       <div class="project-grid">
-        <article class="project"><h2>Sudoki<br>Sushi &amp; Fusion</h2><span class="tag">Comunicación</span></article>
-        <article class="project"><h2>TCAM</h2><span class="tag">Organización de Evento + Rebranding</span></article>
-        <article class="project"><h2>Òptica &amp;<br>Audiologia<br>Universitària</h2><span class="tag">Campaña 360</span></article>
-        <article class="project"><h2>Rummix</h2><span class="tag">Branding</span></article>
-        <article class="project"><h2>Banc de Sang i<br>Teixits</h2><span class="tag">Diseño</span></article>
-        <article class="project"><h2>MalEducados</h2><span class="tag">Branding</span></article>
-        <article class="project"><h2>Centre d’Estudis<br>Politècnics</h2><span class="tag">Diseño</span></article>
-        <article class="project"><h2>Tour(F)estiu</h2><span class="tag">Branding</span></article>
+        <a class="project" href="https://drive.google.com/file/d/1GqsDLFvJcLIJdDQHcvPP2p7k3G67gva-/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Sudoki Sushi &amp; Fusion"><h2>Sudoki<br>Sushi &amp; Fusion</h2><span class="tag">Comunicación</span></a>
+        <a class="project" href="https://drive.google.com/file/d/1SOP8HwEFOoVGf8EdK5hGQk67qXZCCbPB/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto TCAM"><h2>TCAM</h2><span class="tag">Organización de Evento + Rebranding</span></a>
+        <a class="project" href="https://drive.google.com/file/d/1ooGdrJIq9lj6LIlf2PIsmjjNVhf50Q6i/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Òptica &amp; Audiologia Universitària"><h2>Òptica &amp;<br>Audiologia<br>Universitària</h2><span class="tag">Campaña 360</span></a>
+        <a class="project" href="https://drive.google.com/file/d/1JikflgEKmWIuVkNPnbPBkm_SeEbqHzpB/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Rummix"><h2>Rummix</h2><span class="tag">Branding</span></a>
+        <a class="project" href="https://drive.google.com/file/d/1XctNyfusZQmJKgKrfvd5jcCv0Rl5t9vW/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Banc de Sang i Teixits"><h2>Banc de Sang i<br>Teixits</h2><span class="tag">Diseño</span></a>
+        <a class="project" href="https://drive.google.com/file/d/1cwdvpHIMjynQHdP1VxY5hsjYhfhl9oXa/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto MalEducados"><h2>MalEducados</h2><span class="tag">Branding</span></a>
+        <a class="project" href="https://drive.google.com/file/d/1Ai7Y_O6iZ6HqidyeC_V1pgLqmwF04n16/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Centre d’Estudis Politècnics"><h2>Centre d’Estudis<br>Politècnics</h2><span class="tag">Diseño</span></a>
+        <a class="project" href="https://drive.google.com/file/d/1KrxQnXwGXBzGZlNLyXdCRqyUdhpLxBSD/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Tour(F)estiu"><h2>Tour(F)estiu</h2><span class="tag">Branding</span></a>
       </div>
     </section>
 
     <section class="references" aria-label="Referencias">
       <span class="label">Referencias</span>
-      <span>SABSEG</span><span>Fundación Ship2B</span><span>Centre d’Estudis Politècnics</span>
+      <a href="https://docs.google.com/document/d/12Ump4MJUgBVHhie9yO0lUTVLUAa9TZvV/edit?usp=sharing&amp;ouid=108776990754111594240&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener noreferrer" aria-label="Ver referencia SABSEG">SABSEG</a>
+      <a href="https://drive.google.com/file/d/1YXBSDvY0-XGLtffMXJh0HUe7aRre5c_M/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver referencia Fundación Ship2B">Fundación Ship2B</a>
+      <a href="https://drive.google.com/file/d/1IuPN1Db9NN0NyBsEhFOZDfPNYEKKIciB/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver referencia Centre d’Estudis Politècnics">Centre d’Estudis Politècnics</a>
     </section>
     <div class="hello" aria-hidden="true">HOLA<em>!</em>CIAO&nbsp; HOLA<em>!</em>CIAO&nbsp;</div>
 
@@ -121,11 +163,26 @@
     const panel = document.getElementById('menu-panel');
     const open = document.getElementById('menu-open');
     const close = document.getElementById('menu-close');
-    const toggle = state => { panel.classList.toggle('open', state); panel.setAttribute('aria-hidden', !state); open.setAttribute('aria-expanded', state); };
+    const toggle = state => {
+      panel.classList.toggle('open', state);
+      panel.setAttribute('aria-hidden', !state);
+      open.setAttribute('aria-expanded', state);
+      document.body.style.overflow = state ? 'hidden' : '';
+      if (state) close.focus();
+      else open.focus();
+    };
     open.addEventListener('click', () => toggle(true));
     close.addEventListener('click', () => toggle(false));
     panel.querySelectorAll('a').forEach(link => link.addEventListener('click', () => toggle(false)));
     window.addEventListener('keydown', event => { if (event.key === 'Escape') toggle(false); });
+    const cursor = document.querySelector('.asterisk-cursor');
+    if (window.matchMedia('(pointer:fine)').matches) {
+      window.addEventListener('pointermove', event => {
+        cursor.style.left = `${event.clientX}px`;
+        cursor.style.top = `${event.clientY}px`;
+        cursor.style.visibility = 'visible';
+      });
+    }
   </script>
 </body>
 </html>
