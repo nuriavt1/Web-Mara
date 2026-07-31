@@ -49,8 +49,8 @@
     .menu-close { position:absolute; z-index:2; top:13px; right:var(--pad); color:#fff; background:none; border:0; padding:8px 0; font-size:16px; font-weight:700; text-transform:uppercase; transition:color .25s ease, transform .35s cubic-bezier(.16,1,.3,1); }
     .menu-close:hover, .menu-close:focus-visible { color:#b8ff38; transform:translateX(-8px); outline:none; }
 
-    .hero { height:clamp(275px, 36vw, 555px); min-height:275px; display:flex; align-items:center; overflow:hidden; background:#000; color:#fff; }
-    .hero h1 { margin:0; padding-left:1.1vw; white-space:nowrap; font-family:"Poppins", Impact, sans-serif; font-size:clamp(185px, 28.8vw, 442px); font-weight:900; letter-spacing:-.095em; line-height:.74; }
+    .hero { height:clamp(275px, 36vw, 555px); min-height:275px; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#000; color:#fff; }
+    .hero h1 { margin:0; white-space:nowrap; text-align:center; font-family:"Poppins", Impact, sans-serif; font-size:clamp(185px, 28.8vw, 442px); font-weight:900; letter-spacing:-.095em; line-height:.74; }
     .ticker { height:44px; display:flex; align-items:center; overflow:hidden; white-space:nowrap; border-bottom:1px solid #ddd; font-size:16px; font-weight:700; }
     .ticker-track { display:flex; width:max-content; animation:move 25s linear infinite; will-change:transform; }
     .ticker-track span { flex:none; padding-right:2rem; }
@@ -61,14 +61,17 @@
     .work .label { margin-bottom:28px; }
     .project-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); border-top:1px solid var(--line); border-left:1px solid var(--line); }
     .project { position:relative; min-height:clamp(275px, 34vw, 525px); display:flex; align-items:center; justify-content:center; padding:clamp(34px, 5vw, 76px); background:#000; color:#fff; border-right:1px solid var(--line); border-bottom:1px solid var(--line); text-align:center; overflow:hidden; }
-    .project::after { content:""; position:absolute; inset:0; border:0 solid #fff; transition:border-width .2s ease; pointer-events:none; }
+    .project::before { content:""; position:absolute; z-index:0; inset:0; background:#fff; opacity:0; transition:opacity .4s cubic-bezier(.16,1,.3,1); pointer-events:none; }
+    .project::after { content:""; position:absolute; z-index:3; inset:0; border:0 solid #fff; transition:border-width .2s ease; pointer-events:none; }
+    .project:hover::before, .project:focus-visible::before { opacity:.78; }
     .project:hover::after, .project:focus-visible::after { border-width:8px; }
     .project:focus-visible { outline:3px solid #b8ff38; outline-offset:-3px; }
-    .project-intro { width:100%; transition:opacity .3s ease, transform .4s cubic-bezier(.16,1,.3,1); }
+    .project-intro { position:relative; z-index:1; width:100%; transition:opacity .3s ease, transform .4s cubic-bezier(.16,1,.3,1); }
     .project h2 { margin:0; font-family:"Poppins", sans-serif; font-size:clamp(26px, 4.1vw, 64px); font-weight:900; line-height:.98; letter-spacing:-.075em; }
     .project .claim { display:block; max-width:38rem; margin:clamp(12px, 1.6vw, 22px) auto 0; font-size:clamp(13px, 1.15vw, 17px); font-weight:400; line-height:1.4; letter-spacing:0; }
-    .project .description { position:absolute; top:50%; left:50%; width:min(78%, 620px); margin:0; font-size:clamp(15px, 1.55vw, 22px); font-weight:400; line-height:1.55; opacity:0; transform:translate(-50%, -42%); transition:opacity .3s ease, transform .4s cubic-bezier(.16,1,.3,1); }
-    .project .tag { position:absolute; z-index:2; top:clamp(18px, 2vw, 32px); right:clamp(20px, 2.5vw, 40px); padding:6px 12px; border:1px solid #aaa; font-size:clamp(11px, 1vw, 14px); font-weight:400; line-height:1.25; text-align:right; }
+    .project .description { position:absolute; z-index:1; top:50%; left:50%; width:min(78%, 620px); margin:0; color:#111; font-size:clamp(15px, 1.55vw, 22px); font-weight:400; line-height:1.55; opacity:0; transform:translate(-50%, -42%); transition:opacity .3s ease, transform .4s cubic-bezier(.16,1,.3,1); }
+    .project .tag { position:absolute; z-index:2; top:clamp(18px, 2vw, 32px); right:clamp(20px, 2.5vw, 40px); padding:6px 12px; border:1px solid #aaa; font-size:clamp(11px, 1vw, 14px); font-weight:400; line-height:1.25; text-align:right; transition:color .3s ease, border-color .3s ease; }
+    .project:hover .tag, .project:focus-visible .tag { color:#111; border-color:#555; }
     .project:hover .project-intro, .project:focus-visible .project-intro { opacity:0; transform:translateY(-16px); }
     .project:hover .description, .project:focus-visible .description { opacity:1; transform:translate(-50%, -50%); }
 
@@ -79,6 +82,8 @@
     .references a:hover, .references a:focus-visible { color:#b8ff38; transform:translateY(-4px); outline:none; }
     .references a:hover::after, .references a:focus-visible::after { transform:scaleX(1); transform-origin:left; }
     .hello { height:clamp(180px, 24vw, 360px); display:flex; align-items:center; overflow:hidden; white-space:nowrap; font-family:"Poppins", sans-serif; font-size:clamp(150px, 25vw, 385px); font-weight:900; letter-spacing:-.11em; line-height:.7; }
+    .hello-track { display:flex; width:max-content; animation:move 18s linear infinite; will-change:transform; }
+    .hello-track span { flex:none; padding-right:.18em; }
     .hello em { color:#c9c9c9; font-style:normal; }
 
     .contact { min-height:clamp(310px, 28vw, 440px); display:grid; grid-template-columns:1.1fr 1fr; gap:40px; padding:46px var(--pad) 70px; }
@@ -102,7 +107,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior:auto; }
-      .ticker-track, .asterisk-cursor, .menu-panel.open nav a { animation:none; }
+      .ticker-track, .hello-track, .asterisk-cursor, .menu-panel.open nav a { animation:none; }
       .menu-panel, .menu-panel::before, .menu-panel nav a, .menu-panel nav a::after, .menu-close { transition:none; }
     }
   </style>
@@ -138,7 +143,7 @@
         <a class="project" href="https://drive.google.com/file/d/1SOP8HwEFOoVGf8EdK5hGQk67qXZCCbPB/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto TCAM"><div class="project-intro"><h2>TCAM</h2><span class="claim">Tienes una cita, con tu cerveza favorita</span></div><p class="description">Desarrollo del diseño y la organización de un evento, junto con una propuesta de rebranding para renovar la identidad y la experiencia de marca.</p><span class="tag">Organización de eventos + Branding</span></a>
         <a class="project" href="https://drive.google.com/file/d/1GqsDLFvJcLIJdDQHcvPP2p7k3G67gva-/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Sudoki Sushi &amp; Fusion"><div class="project-intro"><h2>Sudoki Sushi &amp; Fusion</h2><span class="claim">Siéntelo, gózalo</span></div><p class="description">Desarrollo de una campaña de comunicación transmedia para aumentar la notoriedad de marca e impulsar las ventas.</p><span class="tag">Comunicación</span></a>
         <a class="project" href="https://drive.google.com/file/d/1cwdvpHIMjynQHdP1VxY5hsjYhfhl9oXa/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto MalEducados"><div class="project-intro"><h2>MalEducados</h2><span class="claim">Deseducando a los educadores</span></div><p class="description">Desarrollo de la identidad de marca y la estrategia de comunicación para impulsar el lanzamiento y el posicionamiento del producto.</p><span class="tag">Branding</span></a>
-        <a class="project" href="https://drive.google.com/file/d/1ooGdrJIq9lj6LIlf2PIsmjjNVhf50Q6i/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Òptica &amp; Audiologia Universitària"><div class="project-intro"><h2>Òptica &amp; Audiologia Universitària</h2><span class="claim">No te pierdas nada, ni por FOMO</span></div><p class="description">Desarrollo de una campaña de comunicación 360º para conectar con el público universitario y reforzar el posicionamiento de marca.</p><span class="tag">Comunicación</span></a>
+        <a class="project" href="https://drive.google.com/file/d/1ooGdrJIq9lj6LIlf2PIsmjjNVhf50Q6i/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Óptica &amp; Audiologia Universitaria"><div class="project-intro"><h2>Óptica &amp; Audiologia Universitaria</h2><span class="claim">No te pierdas nada, ni por FOMO</span></div><p class="description">Desarrollo de una campaña de comunicación 360º para conectar con el público universitario y reforzar el posicionamiento de marca.</p><span class="tag">Comunicación</span></a>
         <a class="project" href="https://drive.google.com/file/d/1XctNyfusZQmJKgKrfvd5jcCv0Rl5t9vW/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Banc de Sang i Teixits"><div class="project-intro"><h2>Banc de Sang i Teixits</h2><span class="claim">Per tu, donar. Per altres, bategar</span></div><p class="description">Desarrollo del concepto creativo, el claim y la pieza gráfica principal de la campaña para aumentar el impacto y la participación.</p><span class="tag">Diseño</span></a>
         <a class="project" href="https://drive.google.com/file/d/1Ai7Y_O6iZ6HqidyeC_V1pgLqmwF04n16/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Centre d’Estudis Politècnics"><div class="project-intro"><h2>Centre d’Estudis Politècnics</h2><span class="claim">It’s my turn</span></div><p class="description">Desarrollo del diseño editorial y la maquetación de la revista anual de la marca para reforzar su identidad.</p><span class="tag">Diseño</span></a>
       </div>
@@ -150,14 +155,19 @@
       <a href="https://drive.google.com/file/d/1YXBSDvY0-XGLtffMXJh0HUe7aRre5c_M/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver referencia Fundación Ship2B">Fundación Ship2B</a>
       <a href="https://drive.google.com/file/d/1IuPN1Db9NN0NyBsEhFOZDfPNYEKKIciB/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver referencia Centre d’Estudis Politècnics">Centre d’Estudis Politècnics</a>
     </section>
-    <div class="hello" aria-hidden="true">HOLA<em>!</em>CIAO&nbsp; HOLA<em>!</em>CIAO&nbsp;</div>
+    <div class="hello" aria-hidden="true">
+      <div class="hello-track">
+        <span>HOLA<em>!</em> CIAO<em>!</em>&nbsp;</span>
+        <span>HOLA<em>!</em> CIAO<em>!</em>&nbsp;</span>
+      </div>
+    </div>
 
     <section class="contact" id="contacto">
       <div><span class="label">Contact</span><h2>Hablemos*</h2></div>
       <div class="details">
         <div><strong>Email</strong><a href="mailto:maragranadosgil@gmail.com">maragranadosgil@gmail.com</a></div>
         <div><strong>Teléfono</strong><a href="tel:+34640589404">+34 640 589 404</a></div>
-        <div><strong>LinkedIn</strong><a href="#">linkedin.com/in/mara-del-granado-868643228</a></div>
+        <div><strong>LinkedIn</strong><a href="https://www.linkedin.com/in/mara-gil-granados-868043228/" target="_blank" rel="noopener noreferrer">linkedin.com/in/mara-gil-granados-868043228</a></div>
       </div>
     </section>
   </main>
