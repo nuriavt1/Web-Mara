@@ -60,12 +60,17 @@
     .work { padding:clamp(70px, 9vw, 145px) var(--pad) clamp(30px, 4vw, 60px); }
     .work .label { margin-bottom:28px; }
     .project-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); border-top:1px solid var(--line); border-left:1px solid var(--line); }
-    .project { position:relative; min-height:clamp(275px, 34vw, 525px); display:flex; align-items:center; justify-content:center; padding:34px; background:#000; color:#fff; border-right:1px solid var(--line); border-bottom:1px solid var(--line); text-align:center; overflow:hidden; }
+    .project { position:relative; min-height:clamp(275px, 34vw, 525px); display:flex; align-items:center; justify-content:center; padding:clamp(34px, 5vw, 76px); background:#000; color:#fff; border-right:1px solid var(--line); border-bottom:1px solid var(--line); text-align:center; overflow:hidden; }
     .project::after { content:""; position:absolute; inset:0; border:0 solid #fff; transition:border-width .2s ease; pointer-events:none; }
     .project:hover::after, .project:focus-visible::after { border-width:8px; }
     .project:focus-visible { outline:3px solid #b8ff38; outline-offset:-3px; }
-    .project h2 { max-width:90%; margin:0; font-family:"Poppins", sans-serif; font-size:clamp(26px, 4.1vw, 64px); font-weight:900; line-height:.98; letter-spacing:-.075em; }
-    .project .tag { position:absolute; left:clamp(20px, 2.5vw, 40px); bottom:clamp(18px, 2vw, 32px); padding:5px 16px; border:1px solid #aaa; border-radius:999px; font-size:16px; line-height:1; }
+    .project-intro { width:100%; transition:opacity .3s ease, transform .4s cubic-bezier(.16,1,.3,1); }
+    .project h2 { margin:0; font-family:"Poppins", sans-serif; font-size:clamp(26px, 4.1vw, 64px); font-weight:900; line-height:.98; letter-spacing:-.075em; }
+    .project .claim { display:block; max-width:38rem; margin:clamp(12px, 1.6vw, 22px) auto 0; font-size:clamp(13px, 1.15vw, 17px); font-weight:400; line-height:1.4; letter-spacing:0; }
+    .project .description { position:absolute; top:50%; left:50%; width:min(78%, 620px); margin:0; font-size:clamp(15px, 1.55vw, 22px); font-weight:400; line-height:1.55; opacity:0; transform:translate(-50%, -42%); transition:opacity .3s ease, transform .4s cubic-bezier(.16,1,.3,1); }
+    .project .tag { position:absolute; z-index:2; top:clamp(18px, 2vw, 32px); right:clamp(20px, 2.5vw, 40px); padding:6px 12px; border:1px solid #aaa; font-size:clamp(11px, 1vw, 14px); font-weight:400; line-height:1.25; text-align:right; }
+    .project:hover .project-intro, .project:focus-visible .project-intro { opacity:0; transform:translateY(-16px); }
+    .project:hover .description, .project:focus-visible .description { opacity:1; transform:translate(-50%, -50%); }
 
     .references { min-height:112px; display:grid; grid-template-columns:1.4fr repeat(3, 1fr); align-items:center; gap:24px; padding:30px var(--pad); background:#000; color:#fff; }
     .references .label { align-self:start; }
@@ -130,14 +135,12 @@
     <section class="work" id="portfolio">
       <span class="label">Portfolio</span>
       <div class="project-grid">
-        <a class="project" href="https://drive.google.com/file/d/1GqsDLFvJcLIJdDQHcvPP2p7k3G67gva-/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Sudoki Sushi &amp; Fusion"><h2>Sudoki<br>Sushi &amp; Fusion</h2><span class="tag">Comunicación</span></a>
-        <a class="project" href="https://drive.google.com/file/d/1SOP8HwEFOoVGf8EdK5hGQk67qXZCCbPB/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto TCAM"><h2>TCAM</h2><span class="tag">Organización de Evento + Rebranding</span></a>
-        <a class="project" href="https://drive.google.com/file/d/1ooGdrJIq9lj6LIlf2PIsmjjNVhf50Q6i/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Òptica &amp; Audiologia Universitària"><h2>Òptica &amp;<br>Audiologia<br>Universitària</h2><span class="tag">Campaña 360</span></a>
-        <a class="project" href="https://drive.google.com/file/d/1JikflgEKmWIuVkNPnbPBkm_SeEbqHzpB/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Rummix"><h2>Rummix</h2><span class="tag">Branding</span></a>
-        <a class="project" href="https://drive.google.com/file/d/1XctNyfusZQmJKgKrfvd5jcCv0Rl5t9vW/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Banc de Sang i Teixits"><h2>Banc de Sang i<br>Teixits</h2><span class="tag">Diseño</span></a>
-        <a class="project" href="https://drive.google.com/file/d/1cwdvpHIMjynQHdP1VxY5hsjYhfhl9oXa/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto MalEducados"><h2>MalEducados</h2><span class="tag">Branding</span></a>
-        <a class="project" href="https://drive.google.com/file/d/1Ai7Y_O6iZ6HqidyeC_V1pgLqmwF04n16/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Centre d’Estudis Politècnics"><h2>Centre d’Estudis<br>Politècnics</h2><span class="tag">Diseño</span></a>
-        <a class="project" href="https://drive.google.com/file/d/1KrxQnXwGXBzGZlNLyXdCRqyUdhpLxBSD/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Tour(F)estiu"><h2>Tour(F)estiu</h2><span class="tag">Branding</span></a>
+        <a class="project" href="https://drive.google.com/file/d/1GqsDLFvJcLIJdDQHcvPP2p7k3G67gva-/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Sudoki Sushi &amp; Fusion"><div class="project-intro"><h2>Sudoki Sushi &amp; Fusion</h2><span class="claim">Siéntelo, gózalo</span></div><p class="description">Desarrollo de una campaña de comunicación transmedia para aumentar la notoriedad de marca e impulsar las ventas.</p><span class="tag">Comunicación</span></a>
+        <a class="project" href="https://drive.google.com/file/d/1SOP8HwEFOoVGf8EdK5hGQk67qXZCCbPB/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto TCAM"><div class="project-intro"><h2>TCAM</h2><span class="claim">Tienes una cita, con tu cerveza favorita</span></div><p class="description">Desarrollo del diseño y la organización de un evento, junto con una propuesta de rebranding para renovar la identidad y la experiencia de marca.</p><span class="tag">Organización de eventos + Branding</span></a>
+        <a class="project" href="https://drive.google.com/file/d/1cwdvpHIMjynQHdP1VxY5hsjYhfhl9oXa/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto MalEducados"><div class="project-intro"><h2>MalEducados</h2><span class="claim">Deseducando a los educadores</span></div><p class="description">Desarrollo de la identidad de marca y la estrategia de comunicación para impulsar el lanzamiento y el posicionamiento del producto.</p><span class="tag">Branding</span></a>
+        <a class="project" href="https://drive.google.com/file/d/1ooGdrJIq9lj6LIlf2PIsmjjNVhf50Q6i/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Òptica &amp; Audiologia Universitària"><div class="project-intro"><h2>Òptica &amp; Audiologia Universitària</h2><span class="claim">No te pierdas nada, ni por FOMO</span></div><p class="description">Desarrollo de una campaña de comunicación 360º para conectar con el público universitario y reforzar el posicionamiento de marca.</p><span class="tag">Comunicación</span></a>
+        <a class="project" href="https://drive.google.com/file/d/1XctNyfusZQmJKgKrfvd5jcCv0Rl5t9vW/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Banc de Sang i Teixits"><div class="project-intro"><h2>Banc de Sang i Teixits</h2><span class="claim">Per tu, donar. Per altres, bategar</span></div><p class="description">Desarrollo del concepto creativo, el claim y la pieza gráfica principal de la campaña para aumentar el impacto y la participación.</p><span class="tag">Diseño</span></a>
+        <a class="project" href="https://drive.google.com/file/d/1Ai7Y_O6iZ6HqidyeC_V1pgLqmwF04n16/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Ver proyecto Centre d’Estudis Politècnics"><div class="project-intro"><h2>Centre d’Estudis Politècnics</h2><span class="claim">It’s my turn</span></div><p class="description">Desarrollo del diseño editorial y la maquetación de la revista anual de la marca para reforzar su identidad.</p><span class="tag">Diseño</span></a>
       </div>
     </section>
 
@@ -152,7 +155,7 @@
     <section class="contact" id="contacto">
       <div><span class="label">Contact</span><h2>Hablemos*</h2></div>
       <div class="details">
-        <div><strong>Email</strong><a href="mailto:maragonzalez@gmail.com">maragonzalez@gmail.com</a></div>
+        <div><strong>Email</strong><a href="mailto:maragranadosgil@gmail.com">maragranadosgil@gmail.com</a></div>
         <div><strong>Teléfono</strong><a href="tel:+34640589404">+34 640 589 404</a></div>
         <div><strong>LinkedIn</strong><a href="#">linkedin.com/in/mara-del-granado-868643228</a></div>
       </div>
